@@ -7,6 +7,10 @@ import { useAppContext } from '../../app.context';
 
 const CountryDetails = ({ country, borders }) => {
 	const { dark } = useAppContext();
+
+	function formatNumber(number) {
+		return number.toFixed().replace(/\d(?=(\d{3})+\.)/g, '$&.');
+	}
 	return (
 		<div className={dark && 'dark'}>
 			<NavBar />
@@ -44,7 +48,9 @@ const CountryDetails = ({ country, borders }) => {
 									<p className='font-semibold'>
 										Population:
 										<span className='font-normal ml-2'>
-											{country.population}
+											{country.population
+												? country.population.toLocaleString('de-DE')
+												: 'No population here'}
 										</span>
 									</p>
 									<p className='font-semibold'>
@@ -59,27 +65,32 @@ const CountryDetails = ({ country, borders }) => {
 									</p>
 									<p className='font-semibold'>
 										Capital:
-										<span className='font-normal ml-2'>{country.capital}</span>
+										<span className='font-normal ml-2'>
+											{country.capital ? country.capital : 'No capital'}
+										</span>
 									</p>
 								</div>
 								<div className='space-y-3 md:ml-10 lg:ml-0'>
 									<p className='font-semibold'>
 										Top Level Domain:
 										<span className='font-normal ml-2'>
-											{country.topLevelDomain}
+											{country.topLevelDomain ? country.topLevelDomain : ''}
 										</span>
 									</p>
 									<p className='font-semibold'>
 										Currencies:
 										<span className='font-normal ml-2'>
-											{country.currencies && country.currencies[0].name}
+											{country.currencies && country.currencies.length > 0
+												? country.currencies[0].name
+												: 'No currencies'}
 										</span>
 									</p>
 									<p className='font-semibold'>
 										Languages:
 										<span className='font-normal ml-2'>
-											{country.languages &&
-												country.languages.map((lang) => lang.name + ', ')}
+											{country.languages && country.languages.length > 0
+												? country.languages.map((lang) => lang.name + ', ')
+												: 'No languages'}
 										</span>
 									</p>
 								</div>
@@ -89,7 +100,7 @@ const CountryDetails = ({ country, borders }) => {
 									Border Countries:
 								</p>
 								<ul>
-									{borders ? (
+									{borders && borders.length > 0 ? (
 										borders.map((border, idx) => (
 											<Link
 												href={`/country/${border.alpha3Code}`}
