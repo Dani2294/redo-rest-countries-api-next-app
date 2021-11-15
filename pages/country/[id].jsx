@@ -7,10 +7,6 @@ import { useAppContext } from '../../app.context';
 
 const CountryDetails = ({ country, borders }) => {
 	const { dark } = useAppContext();
-
-	function formatNumber(number) {
-		return number.toFixed().replace(/\d(?=(\d{3})+\.)/g, '$&.');
-	}
 	return (
 		<div className={dark && 'dark'}>
 			<NavBar />
