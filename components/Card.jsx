@@ -28,7 +28,7 @@ const Card = ({ country }) => {
 							<p className='font-semibold'>
 								Population:
 								<span className='text-lminput-dark-gray font-normal ml-1 dark:text-white'>
-									{country.population}
+									{country.population.toLocaleString('de-DE')}
 								</span>
 							</p>
 							<p className='font-semibold'>
