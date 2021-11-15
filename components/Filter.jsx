@@ -18,6 +18,7 @@ const Filter = ({ filterCountries, filterValue }) => {
 				</div>
 				<div>
 					<select
+						name='region'
 						value={filterValue.select}
 						onChange={(e) => filterCountries('region', e.target.value)}
 						className='py-5 pl-6 pr-10 text-lg text-lmtxt-very-dark-blue bg-white rounded-md shadow-lg border-none outline-none dark:bg-dmelts-dark-blue dark:text-white'>
